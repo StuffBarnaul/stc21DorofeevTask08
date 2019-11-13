@@ -1,5 +1,7 @@
 package ru.dorofeev.homework.task08;
 
+import java.util.HashMap;
+
 public class CountLine extends Thread {
     int[][] field;
     int[][] iteration;

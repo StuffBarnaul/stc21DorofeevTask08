@@ -7,22 +7,18 @@ public class LifeSingleThread {
     private static int width;
     private static int height;
 
-    public static void main(String[] args) {
+    public void count(String input,String output, int iterations) {
         long start = System.currentTimeMillis();
-        ArrayList<String> list = readData(args[0]);
-        int field[][] = new int[height][width];
-        for (int i = 0; i < height ; i++) {
-            for (int j = 0; j < width; j++) {
-                if (list.get(i).charAt(j) == 48) field[i][j] = 0;
-                else field[i][j] = 1;
-            }
-        }
-        for (int i = 0; i < Integer.valueOf(args[2]); i++) {
+        int[][] field = readData(input);
+        for (int i = 0; i < iterations; i++) {
             field = move(field);
         }
-        writeData(field, args[1]);
+        writeData(field, output);
         long end = System.currentTimeMillis();
-        System.out.println(end-start);
+        System.out.println(String.format("Field size: %s x %s", width, height));
+        System.out.println(String.format("Method: SingleThread"));
+        System.out.println(String.format("Number of iterations: %s", iterations));
+        System.out.println(String.format("Time: %s", end-start));
     }
 
     private static int[][] move(int[][] field) {
@@ -63,7 +59,7 @@ public class LifeSingleThread {
         }
     }
 
-    private static ArrayList<String> readData(String inputfile) {
+    private static int[][] readData(String inputfile) {
         try (BufferedReader reader = new BufferedReader(new FileReader(new File(inputfile)))){
             ArrayList<String> list = new ArrayList<>();
             while (true){
@@ -74,7 +70,14 @@ public class LifeSingleThread {
             }
             width = list.get(0).length();
             height = list.size();
-            return list;
+            int[][] field = new int[height][width];
+            for (int i = 0; i < height ; i++) {
+                for (int j = 0; j < width; j++) {
+                    if (list.get(i).charAt(j) == 48) field[i][j] = 0;
+                    else field[i][j] = 1;
+                }
+            }
+            return field;
         } catch (IOException e) {
             e.printStackTrace();
         }
