@@ -2,6 +2,7 @@ package ru.dorofeev.homework.task08;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class LifeSingleThread {
     private static int width;
@@ -28,14 +29,14 @@ public class LifeSingleThread {
                 int innerHeight = height+i;
                 int innerWidth = width+j;
                 int neightbours = 0;
-                if (field[(innerHeight-1)%height][(innerWidth-1)%width] != 0) neightbours++;
-                if (field[(innerHeight-1)%height][(innerWidth)%width] != 0) neightbours++;
-                if (field[(innerHeight-1)%height][(innerWidth+1)%width] != 0) neightbours++;
-                if (field[(innerHeight)%height][(innerWidth-1)%width] != 0) neightbours++;
-                if (field[(innerHeight)%height][(innerWidth+1)%width] != 0) neightbours++;
-                if (field[(innerHeight+1)%height][(innerWidth-1)%width] != 0) neightbours++;
-                if (field[(innerHeight+1)%height][(innerWidth)%width] != 0) neightbours++;
-                if (field[(innerHeight+1)%height][(innerWidth+1)%width] != 0) neightbours++;
+                neightbours += field[(innerHeight-1)%height][(innerWidth-1)%width];
+                neightbours += field[(innerHeight-1)%height][(innerWidth)%width];
+                neightbours += field[(innerHeight-1)%height][(innerWidth+1)%width];
+                neightbours += field[(innerHeight)%height][(innerWidth-1)%width];
+                neightbours += field[(innerHeight)%height][(innerWidth+1)%width];
+                neightbours += field[(innerHeight+1)%height][(innerWidth-1)%width];
+                neightbours += field[(innerHeight+1)%height][(innerWidth)%width];
+                neightbours += field[(innerHeight+1)%height][(innerWidth+1)%width];
                 if (neightbours<2 || neightbours>3) iteration[i][j] = 0;
                 if (neightbours == 2) iteration[i][j] = field[i][j];
                 if (neightbours == 3) iteration[i][j] = 1;
@@ -61,7 +62,7 @@ public class LifeSingleThread {
 
     private static int[][] readData(String inputfile) {
         try (BufferedReader reader = new BufferedReader(new FileReader(new File(inputfile)))){
-            ArrayList<String> list = new ArrayList<>();
+            List<String> list = new ArrayList<>();
             while (true){
                 String line = reader.readLine();
                 if (line == null) break;

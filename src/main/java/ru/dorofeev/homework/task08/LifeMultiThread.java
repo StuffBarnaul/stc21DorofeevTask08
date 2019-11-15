@@ -9,11 +9,11 @@ public class LifeMultiThread {
     private static int width;
     private static int height;
 
-    public void count(String input,String output, int iterations) {
+    public void count(String input,String output, int iterations, int n) {
         long start = System.currentTimeMillis();
         int[][] field = readData(input);
         for (int i = 0; i < iterations; i++) {
-            field = move(field);
+            field = move(field,n);
         }
         writeData(field, output);
         long end = System.currentTimeMillis();
@@ -23,8 +23,8 @@ public class LifeMultiThread {
         System.out.println(String.format("Time: %s", end-start));
     }
 
-    private static int[][] move(int[][] field) {
-        ExecutorService executorService = Executors.newFixedThreadPool(1);
+    private static int[][] move(int[][] field,int n) {
+        ExecutorService executorService = Executors.newFixedThreadPool(n);
         int[][] iteration = new int[height][width];
         for (int i = 0; i < height; i++) {
             CountLine countLine = new CountLine(field, iteration, i);

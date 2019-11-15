@@ -1,7 +1,5 @@
 package ru.dorofeev.homework.task08;
 
-import java.util.HashMap;
-
 public class CountLine extends Thread {
     int[][] field;
     int[][] iteration;
@@ -23,15 +21,14 @@ public class CountLine extends Thread {
             int innerHeight = height+i;
             int innerWidth = width+j;
             int neightbours = 0;
-            if (field[(innerHeight-1)%height][(innerWidth-1)%width] != 0) neightbours++;
-            if (field[(innerHeight-1)%height][(innerWidth)%width] != 0) neightbours++;
-            if (field[(innerHeight-1)%height][(innerWidth+1)%width] != 0) neightbours++;
-            if (field[(innerHeight)%height][(innerWidth-1)%width] != 0) neightbours++;
-            if (field[(innerHeight)%height][(innerWidth+1)%width] != 0) neightbours++;
-            if (field[(innerHeight+1)%height][(innerWidth-1)%width] != 0) neightbours++;
-            if (field[(innerHeight+1)%height][(innerWidth)%width] != 0) neightbours++;
-            if (field[(innerHeight+1)%height][(innerWidth+1)%width] != 0) neightbours++;
-            //System.out.println(i+" "+j);
+            neightbours += field[(innerHeight-1)%height][(innerWidth-1)%width];
+            neightbours += field[(innerHeight-1)%height][(innerWidth)%width];
+            neightbours += field[(innerHeight-1)%height][(innerWidth+1)%width];
+            neightbours += field[(innerHeight)%height][(innerWidth-1)%width];
+            neightbours += field[(innerHeight)%height][(innerWidth+1)%width];
+            neightbours += field[(innerHeight+1)%height][(innerWidth-1)%width];
+            neightbours += field[(innerHeight+1)%height][(innerWidth)%width];
+            neightbours += field[(innerHeight+1)%height][(innerWidth+1)%width];
             if (neightbours == 2) iteration[i][j] = field[i][j];
             else if (neightbours == 3) iteration[i][j] = 1;
             else iteration[i][j] = 0;
