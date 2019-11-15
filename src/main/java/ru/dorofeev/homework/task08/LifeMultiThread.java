@@ -9,17 +9,18 @@ public class LifeMultiThread {
     private static int width;
     private static int height;
 
-    public void count(String input,String output, int iterations, int n) {
+    public void count(String input,String output, int iterations, int numberOfThreads) {
         long start = System.currentTimeMillis();
         int[][] field = readData(input);
         for (int i = 0; i < iterations; i++) {
-            field = move(field,n);
+            field = move(field,numberOfThreads);
         }
         writeData(field, output);
         long end = System.currentTimeMillis();
         System.out.println(String.format("Field size: %s x %s", width, height));
         System.out.println(String.format("Method: MultiThread"));
         System.out.println(String.format("Number of iterations: %s", iterations));
+        System.out.println(String.format("Number of Threads: %s", numberOfThreads));
         System.out.println(String.format("Time: %s", end-start));
     }
 
@@ -63,7 +64,7 @@ public class LifeMultiThread {
             int[][] field = new int[height][width];
             for (int i = 0; i < height ; i++) {
                 for (int j = 0; j < width; j++) {
-                    if (list.get(i).charAt(j) == 48) field[i][j] = 0;
+                    if (list.get(i).charAt(j) == '0') field[i][j] = 0;
                     else field[i][j] = 1;
                 }
             }

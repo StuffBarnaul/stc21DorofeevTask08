@@ -74,7 +74,7 @@ public class LifeSingleThread {
             int[][] field = new int[height][width];
             for (int i = 0; i < height ; i++) {
                 for (int j = 0; j < width; j++) {
-                    if (list.get(i).charAt(j) == 48) field[i][j] = 0;
+                    if (list.get(i).charAt(j) == '0') field[i][j] = 0;
                     else field[i][j] = 1;
                 }
             }
