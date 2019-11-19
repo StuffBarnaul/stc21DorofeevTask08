@@ -7,7 +7,7 @@ public class CountLine extends Thread {
     int width;
     int i;
 
-    public CountLine(int[][] field, int[][] iteration, int i) {
+    public CountLine(int i, int[][] field, int[][] iteration) {
         this.field = field;
         this.iteration = iteration;
         this.height = field.length;
@@ -18,20 +18,7 @@ public class CountLine extends Thread {
     @Override
     public void run() {
         for (int j = 0; j < height; j++) {
-            int innerHeight = height+i;
-            int innerWidth = width+j;
-            int neightbours = 0;
-            neightbours += field[(innerHeight-1)%height][(innerWidth-1)%width];
-            neightbours += field[(innerHeight-1)%height][(innerWidth)%width];
-            neightbours += field[(innerHeight-1)%height][(innerWidth+1)%width];
-            neightbours += field[(innerHeight)%height][(innerWidth-1)%width];
-            neightbours += field[(innerHeight)%height][(innerWidth+1)%width];
-            neightbours += field[(innerHeight+1)%height][(innerWidth-1)%width];
-            neightbours += field[(innerHeight+1)%height][(innerWidth)%width];
-            neightbours += field[(innerHeight+1)%height][(innerWidth+1)%width];
-            if (neightbours == 2) iteration[i][j] = field[i][j];
-            else if (neightbours == 3) iteration[i][j] = 1;
-            else iteration[i][j] = 0;
+            LifeUtils.step(i,j,field,iteration);
         }
     }
 }
